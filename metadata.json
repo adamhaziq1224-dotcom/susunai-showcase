@@ -1,0 +1,6 @@
+{
+  "name": "SusunAi",
+  "description": "An AI-powered task management app for students to organize study, sports, and personal life with intelligent scheduling.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

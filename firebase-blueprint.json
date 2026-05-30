@@ -1,0 +1,91 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "A student profile",
+      "type": "object",
+      "properties": {
+        "role": { "type": "string" },
+        "credit_hours": { "type": "number" },
+        "semester_end_date": { "type": "string" },
+        "health_condition": { "type": "string" },
+        "unavailable_times": { "type": "string" },
+        "preferred_free_time": { "type": "string" },
+        "energy_type": { "type": "string" },
+        "onboardingCompleted": { "type": "boolean" },
+        "preferences": { "type": "string" },
+        "dayStartHour": { "type": "number" },
+        "dayEndHour": { "type": "number" },
+        "commute_time": { "type": "string" },
+        "social_battery": { "type": "string" },
+        "study_environment": { "type": "string" },
+        "age": { "type": "number" },
+        "major": { "type": "string" },
+        "mbti": { "type": "string" },
+        "assignment_habits": { "type": "string" },
+        "focus_duration": { "type": "number" },
+        "theme": { "type": "string" },
+        "createdAt": { "type": "number", "description": "Timestamp" },
+        "updatedAt": { "type": "number", "description": "Timestamp" }
+      },
+      "required": ["energy_type", "onboardingCompleted", "preferences", "createdAt", "updatedAt"]
+    },
+    "Task": {
+      "title": "Task",
+      "description": "A student task or event",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "type": { "type": "string" },
+        "duration": { "type": "number", "description": "Duration in minutes" },
+        "date": { "type": "string", "description": "ISO date string" },
+        "status": { "type": "string", "enum": ["pending", "completed"] },
+        "description": { "type": "string", "description": "Venue, links, or important notes" },
+        "reminderMinutes": { "type": "number" },
+        "energyImpact": { "type": "number" },
+        "createdAt": { "type": "number" },
+        "updatedAt": { "type": "number" }
+      },
+      "required": ["title", "type", "duration", "date", "status", "createdAt", "updatedAt"]
+    },
+    "Admin": {
+      "title": "Admin",
+      "description": "An administrator configuration",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["email", "createdAt"]
+    },
+    "UserActivity": {
+      "title": "UserActivity",
+      "description": "A log of student settings changes, task completion, or schedule resets",
+      "type": "object",
+      "properties": {
+        "action": { "type": "string" },
+        "details": { "type": "string" },
+        "timestamp": { "type": "number" }
+      },
+      "required": ["action", "details", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "Student settings and data."
+    },
+    "/users/{userId}/tasks/{taskId}": {
+      "schema": { "$ref": "#/entities/Task" },
+      "description": "A task belonging to the student."
+    },
+    "/users/{userId}/activities/{activityId}": {
+      "schema": { "$ref": "#/entities/UserActivity" },
+      "description": "An activity or audit log for student behavioral patterns."
+    },
+    "/admins/{adminId}": {
+      "schema": { "$ref": "#/entities/Admin" },
+      "description": "Registered administrators"
+    }
+  }
+}
